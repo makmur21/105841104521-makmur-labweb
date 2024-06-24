@@ -1,75 +1,86 @@
-import { StyleSheet,Text,View } from "react-native";
+import { StyleSheet,Text,View,TextInput } from "react-native";
 import React from "react"
 
-const App = () => {
-  return (
-      <View 
-      style ={{
-        flex: 1,
-        //alignitems:kolom
-        //justifycontent:baris;
-        flexDirection:"row"
-      }}>
-      <View
-      style={{
-        flex: 1,
-        alignItems:"flex-end",
-        justifyContent:"center",
-      }}>
-        <View
-        style={{
-          width: 140,
-          height: 80,
-          backgroundColor: "red",
-          borderRadius: 10,
-          marginRight: 10,
-          justifyContent: "center",
-          alignItems: "center",
-        }}>
-          <Text
-          style={{
-            color:"white",
-            fontSize:25,
-          }}>
-            SIGN IN
-          </Text>
-        </View>
-      </View>
 
-      <View
-      style={{
-        flex: 1,
-        alignItems:"flex-start",
-        justifyContent: "center",
-      }}>
-        <View
-        style={{
-          flex: 1,
-          alignItems:"flex-start",
-          justifyContent: "center",
-        }}>
-          <View
-          style={{
-            width:140,
-            height:80,
-            backgroundColor:"blue",
-            borderRadius:10,
-            marginLeft:10,
-            justifyContent:"center",
-            alignItems:"center",
-          }}>
-            <Text
-            style={{
-              color: "white",
-              fontSize: 25,
-            }}>
-              SIGN UP
-            </Text>
-          </View>
-        </View>
-      </View>
-    </View>
-      );
+const ButtonConstum = ({Text,Colom})=>{
+  return (
+    <View style={{
+      flex :1,
+      backgroundColor:"red",
+      width:250,
+      height:100,
+      borderRadius:"10",
+      justifyContent:"center",
+      marginBottom:10,
+    }}>
+    <Text style={{
+      textAlign:"center",
+      color:"white",
+      fontSize:30,
+      fontWeight:"bold",
+    }}>
+
+    {Text}
+  </Text>
+</View>
+    )
  }
+const TextInputCostum =({ placeholder,color,typekeyboard}) => {
+    return (
+      <TextInput 
+        placeholder="Masukkan No Hp"
+        keyboardType={typekeyboard}
+        style ={{
+          width:250,
+          height:50,
+          borderColor:"gray",
+          borderWidth:1,
+          borderRadius:10,
+          marginBottom:10,
+          paddingLeft:10,
+        }}/>
+    )
+  }
+  const App = () => {
+    return (
+  <View style={{
+    flex:1,
+    justifyContent:"center",
+    alignItems:"center",
+  }}>
+    {/* <View
+    TextInputCostum
+    keyboardType="default"
+    placeholder="Nama Lengkap"
+    color="green"
+    />
+
+    <View
+    TextInputCostum
+    keyboardType="numeric"
+    placeholder="umur"
+    color="green"
+    />
+
+    <View
+    TextInputCostum
+    keyboardType="email-addreas"
+    placeholder="Email"
+    color="green"
+    />
+
+    <View
+    TextInputCostum
+    keyboardType="default"
+    placeholder="password"
+    color="green"
+    /> */}
+   <TextInputCostum placeholder="Masukkan Nama" color ="blue" />
+    // <TextInputCostum placeholder="Masukkan No Hp" color="red" typekeyboard="numeric" />
+    </View>
+    );
+}
   export default App
+
+ 
       
