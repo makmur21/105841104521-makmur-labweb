@@ -5,15 +5,17 @@ import React from "react";
 const Login =()=> {
     return (
         <View style = {styles.container}>
-            <Text style ={styles.header}>Login </Text>
+           <Text style ={[styles.title,{fontFamily:"Metro-Bold"}]}>Login </Text>
             <TextInput style ={styles.input} placeholder="Email" keyboardType="email-address"/>
             <TextInput style ={styles.input} placeholder="Password" secureTextEntry={true}/>
-            <Text style = {styles.linkText}> Already have an account? </Text>
+            <Text style = {[styles.signlnText,{fontFamily:"Metro-Medium"}]}>
+            Already have an account? </Text>
             <TouchableOpacity style= {styles.button}>
                 <Text style = {styles.buttonText}>Login </Text>
               
             </TouchableOpacity>
-            <Text style = {styles.linkText}> Or sign up with social account </Text>
+            <Text style = {[styles.signlnText,{fontFamily:"Metro-Medium"}]}>
+             Or sign up with social account </Text>
             <View style= { styles.socialLogin}>
                 <View style = { styles.socialLogin}>
                 <View style = { styles.socialColom}>

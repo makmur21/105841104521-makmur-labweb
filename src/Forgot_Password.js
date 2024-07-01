@@ -5,8 +5,9 @@ import React from "react";
 const Forgot_Password =()=> {
     return (
         <View style = {styles.container}>
-            <Text style ={styles.header}>Forgot Password  </Text>
-            <Text style = {styles.linkText}>Please, enter your email address.You Will receive a link to create a new Password via email. </Text>
+            <Text style ={[styles.title,{fontFamily:"Metro-Bold"}]}>Forgot_Password </Text>
+            <Text style = {[styles.signlnText,{fontFamily:"Metro-Medium"}]}>
+            Please, enter your email address.You Will receive a link to create a new Password via email. </Text>
             <TextInput style ={styles.input} placeholder="Email" keyboardType="email-address"/>
             <TouchableOpacity style= {styles.button}>
                 <Text style = {styles.buttonText}>SEND</Text>

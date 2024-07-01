@@ -1,20 +1,22 @@
 import { StyleSheet,Text,View,TextInput,TouchableOpacity,Image } from "react-native";
 import React from "react";
+import {useFonts} from "expo-font";
 
 //Sign Up Screen
 const SIGN_UP =()=> {
     return (
         <View style = {styles.container}>
-            <Text style ={styles.header}>Sign Up </Text>
+            <Text style ={[styles.title,{fontFamily:"Metro-Bold"}]}>SIGN_UP </Text>
             <TextInput style ={styles.input} placeholder="Name"/>
             <TextInput style ={styles.input} placeholder="Email" keyboardType="email-address"/>
             <TextInput style ={styles.input} placeholder="Password" secureTextEntry={true}/>
-            <Text style = {styles.linkText}> Already have an account? </Text>
+            <Text style = {[styles.signlnText,{fontFamily:"Metro-Medium"}]}>
+            Already have an account? </Text>
             <TouchableOpacity style= {styles.buttonSignUp}>
                 <Text style = {styles.buttonText}>SIGN UP </Text>
-              
             </TouchableOpacity>
-            <Text style = {styles.linkText}> Or sign up with social account </Text>
+            <Text style = {[styles.signlnText,{fontFamily:"Metro-Medium"}]}>
+             Or sign up with social account </Text>
             <View style= { styles.socialLogin}>
                 <View style = { styles.socialLogin}>
                 <View style = { styles.socialColom}>
