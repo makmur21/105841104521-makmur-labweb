@@ -1,19 +1,18 @@
 import { StyleSheet,Text,View,TextInput,TouchableOpacity,Image } from "react-native";
 import React from "react";
-import {useFonts} from "expo-font";
 
-//Sign Up Screen
-const SIGN_UP =()=> {
+//Login
+const LoginPage =()=> {
     return (
         <View style = {styles.container}>
-            <Text style ={[styles.title,{fontFamily:"Metro-Bold"}]}>SIGN_UP </Text>
-            <TextInput style ={styles.input} placeholder="Name"/>
+           <Text style ={[styles.title,{fontFamily:"Metro-Bold"}]}>LoginPage </Text>
             <TextInput style ={styles.input} placeholder="Email" keyboardType="email-address"/>
             <TextInput style ={styles.input} placeholder="Password" secureTextEntry={true}/>
             <Text style = {[styles.signlnText,{fontFamily:"Metro-Medium"}]}>
             Already have an account? </Text>
-            <TouchableOpacity style= {styles.buttonSignUp}>
-                <Text style = {styles.buttonText}>SIGN UP </Text>
+            <TouchableOpacity style= {styles.button}>
+                <Text style = {styles.buttonText}>LoginPage </Text>
+              
             </TouchableOpacity>
             <Text style = {[styles.signlnText,{fontFamily:"Metro-Medium"}]}>
              Or sign up with social account </Text>
@@ -57,7 +56,7 @@ export const styles= StyleSheet.create({
         paddingLeft:10,
         borderRadius:5,
     },
-    buttonSignUp:{
+    button:{
         width:"100%",
         height:40,
         backgroundColor:"#FF3D00",
@@ -106,4 +105,4 @@ export const styles= StyleSheet.create({
     },
 });
 
-export default SIGN_UP
+export default Login

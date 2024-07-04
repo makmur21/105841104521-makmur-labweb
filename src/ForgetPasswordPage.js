@@ -2,10 +2,10 @@ import { StyleSheet,Text,View,TextInput,TouchableOpacity,Image } from "react-nat
 import React from "react";
 
 //Login
-const Forgot_Password =()=> {
+const ForgotPasswordPage =()=> {
     return (
         <View style = {styles.container}>
-            <Text style ={[styles.title,{fontFamily:"Metro-Bold"}]}>Forgot_Password </Text>
+            <Text style ={[styles.title,{fontFamily:"Metro-Bold"}]}>ForgotPasswordPage </Text>
             <Text style = {[styles.signlnText,{fontFamily:"Metro-Medium"}]}>
             Please, enter your email address.You Will receive a link to create a new Password via email. </Text>
             <TextInput style ={styles.input} placeholder="Email" keyboardType="email-address"/>
