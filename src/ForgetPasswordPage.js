@@ -1,56 +1,118 @@
-import { StyleSheet,Text,View,TextInput,TouchableOpacity,Image } from "react-native";
-import React from "react";
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image } from "react-native";
+import React, { useState } from "react";
+import { useFonts } from "expo-font";
+import { useNavigation } from "@react-navigation/native";
 
-//Login
-const ForgotPasswordPage =()=> {
+// Sign Up Screen
+const ButtonCustom = ({ text, color, onPress }) => {
     return (
-        <View style = {styles.container}>
-            <Text style ={[styles.title,{fontFamily:"Metro-Bold"}]}>ForgotPasswordPage </Text>
-            <Text style = {[styles.signlnText,{fontFamily:"Metro-Medium"}]}>
-            Please, enter your email address.You Will receive a link to create a new Password via email. </Text>
-            <TextInput style ={styles.input} placeholder="Email" keyboardType="email-address"/>
-            <TouchableOpacity style= {styles.button}>
-                <Text style = {styles.buttonText}>SEND</Text>
-                </TouchableOpacity>
-        </View>
+        <TouchableOpacity onPress={onPress}>
+            <View style={{
+                width: 80,
+                height: 50,
+                backgroundColor: color,
+                borderRadius: 25,
+                marginTop: 20,
+                alignItems: "center",
+                justifyContent: "center",
+            }}>
+                <Text style={{
+                    textAlign: "center",
+                    color: "white",
+                    fontWeight: "bold",
+                }}>
+                    {text}
+                </Text>
+            </View>
+        </TouchableOpacity>
     );
 };
 
-export const styles= StyleSheet.create({
-    container: {
-        flex : 1,
-        justifyContent:"center",
-        alignItems:"center",
-        backgroundColor:"#fff",
-        padding:20,
-    },
-    header:{
-        fontSize:24,
-        fontWeight: "bold",
-        marginBottom:20,
-    },
-    input :{
-        width:"80%",
-        height:40,
-        borderColor:"#acc",
-        borderWidth:1,
-        marginBottom:10,
-        paddingLeft:10,
-        borderRadius:5,
-    },
-    button:{
-        width:"100%",
-        height:40,
-        backgroundColor:"#FF3D00",
-        justifyContent: "center",
-        alignItems:"center",
-        borderRadius:10,
-        marginTop:10,
-    },
-    buttonText:{
-        color :"#fff",
-        fontSize:20,
-    },
-});
+const TextInputCustom = ({ placeholder, color, typeKeyboard, value, onChangeText }) => {
+    return (
+        <TextInput
+            keyboardType={typeKeyboard}
+            placeholder={placeholder}
+            value={value}
+            onChangeText={onChangeText}
+            style={{
+                width: "80%",
+                height: 40,
+                borderColor: color,
+                borderWidth: 1,
+                borderRadius: 5,
+                marginBottom: 20,
+                paddingLeft: 10,
+                fontFamily: "MetroMedium",
+            }}
+        />
+    );
+};
 
-export default Forgot_Password
+const ForgetPasswordPage = () => {
+    const [email, setEmail] = useState('');
+    const [error, setError] = useState(false);
+
+    const [dapatFont] = useFonts({
+        "MetroBold": require("../assets/fonts/Metropolis-Bold.otf"),
+        "MetroMedium": require("../assets/fonts/Metropolis-Medium.otf"),
+    });
+
+    const navigation = useNavigation();
+
+    if (!dapatFont) {
+        return <Text>Font tidak ditemukan...</Text>
+    }
+
+    const validateEmail = () => {
+        if (email === '') {
+            setError(true);
+        } else {
+            setError(false);
+        }
+    }
+
+    return (
+        <View style={{
+            flex: 1,
+            justifyContent: "center",
+            alignItems: "center",
+            backgroundColor: "#fff",
+            padding: 16,
+        }}>
+            <View style={{
+                width: "100%",
+                alignItems: "center",
+                marginBottom: 24,
+            }}>
+                <Text style={{
+                    fontSize: 24,
+                    fontFamily: "MetroBold",
+                    marginBottom: 16
+                }}>Forget Password</Text>
+
+                <Text style={{
+                    fontSize: 16,
+                    color: "#555",
+                    width: "80%",
+                    textAlign: "center",
+                }}>Please, enter your email address. You will receive a link to create a new password via email</Text>
+            </View>
+            <View style={{
+                width: "100%",
+                alignItems: "center",
+            }}>
+                <TextInputCustom
+                    placeholder="Email"
+                    color={error ? "red" : "black"}
+                    typeKeyboard="email-address"
+                    value={email}
+                    onChangeText={setEmail}
+                />
+                <ButtonCustom text="SEND" color="red" onPress={validateEmail} />
+            </View>
+        </View>
+    )
+}
+
+export default ForgetPasswordPage;
