@@ -3,7 +3,10 @@ import { View, Text, Button, Image, TouchableOpacity, TouchableOpacityBase } fro
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import LoginPage from './src/LoginPage';
-import Bag from './Bag';
+import Bagpage from './Bagpage';
+import shoppage from './shoppage';
+import profilpage from './profilpage';
+import favoritepage from './favoritepage';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeAktif from './assets/home_activated.png';
 import HomeInaktif from './assets/home_inactive.png';
@@ -34,7 +37,7 @@ function MyTabs() {
       />
       <Tab.Screen
         name="Bag"
-        component={HomeScreen}
+        component={Bagpage}
         options={{
           headerShown: false, tabBarIcon: ({ focused }) => (
             <Image
@@ -46,7 +49,7 @@ function MyTabs() {
       />
       <Tab.Screen
         name="favorite"
-        component={HomeScreen}
+        component={favoritepage}
         options={{
           headerShown: false, tabBarIcon: ({ focused }) => (
             <Image
@@ -58,7 +61,7 @@ function MyTabs() {
       />
       <Tab.Screen
         name="profil"
-        component={HomeScreen}
+        component={profilpage}
         options={{
           headerShown: false, tabBarIcon: ({ focused }) => (
             <Image
@@ -70,7 +73,7 @@ function MyTabs() {
       />
       <Tab.Screen
         name="shop"
-        component={HomeScreen}
+        component={shoppage}
         options={{
           headerShown: false, tabBarIcon: ({ focused }) => (
             <Image
@@ -104,7 +107,10 @@ function App() {
       <Stack.Navigator>
         <Stack.Screen name="Home" component={MyTabs} />
         <Stack.Screen name="Login" component={LoginPage} />
-        <Stack.Screen name="Bag" component={Bag} />
+        <Stack.Screen name="Bag" component={Bagpage} />
+        <Stack.Screen name="shop" component={shoppage} />
+        <Stack.Screen name="profil" component={profilpage} />
+        <Stack.Screen name="favorite" component={favoritepage} />
       </Stack.Navigator>
     </NavigationContainer>
   );

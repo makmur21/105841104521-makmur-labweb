@@ -1,14 +1,14 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
-const Bag = () => {
+const Bagpage = () => {
   return (
     <View>
-      <Text>Ini adalah halaman Bag</Text>
+      <Text>HALAMAN BAG</Text>
     </View>
   )
 }
 
-export default Bag
+export default Bagpage
 
 const styles = StyleSheet.create({})
