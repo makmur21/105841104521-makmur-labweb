@@ -1,9 +1,21 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, ScrollView, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
-const Categorisatu = () => {
+const categorisatu = () => {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.container}>
+      <TouchableOpacity 
+        style={styles.arrowButton} 
+        onPress={() => navigation.navigate("categorisatu")}
+      >
+        <Ionicons name="arrow-forward" size={24} color="black" />
+      </TouchableOpacity>
+      <View style={styles.container}>
+      <Text style={styles.text}>Ini adalah halaman kategori satu</Text>
+    </View>
       <View style={styles.header}>
         <Text style={styles.headerText}>Categories</Text>
       </View>
@@ -29,6 +41,12 @@ const Categorisatu = () => {
           <Image source={require('../assets/potoshop1.png')} style={styles.cardImage} />
           <Text style={styles.cardTitle}>New</Text>
         </TouchableOpacity>
+        <TouchableOpacity 
+        style={styles.arrowButton} 
+        onPress={() => navigation.navigate('Categorisatu')}
+      >
+        <Ionicons name="arrow-forward" size={24} color="black" />
+      </TouchableOpacity>
         <TouchableOpacity style={styles.card}>
           <Image source={require('../assets/potoshop2.png')} style={styles.cardImage} />
           <Text style={styles.cardTitle}>Clothes</Text>
@@ -113,6 +131,16 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: "#888",
   },
+  arrowButton: {
+    position: 'absolute',
+    top: 20,
+    right: 20,
+    zIndex: 1,
+  },
+  text: {
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
 });
 
-export default Categorisatu;
+export default categorisatu;

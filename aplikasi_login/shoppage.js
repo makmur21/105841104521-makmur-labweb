@@ -1,161 +1,238 @@
-import React, { useState, useCallback } from 'react';
+import React from 'react';
 import { StyleSheet, Text, View, FlatList, ScrollView, TouchableOpacity, Image } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import Catalogsatu from "../aplikasi_login/catalogsatu";
-import Categorisatu from "../aplikasi_login/categorisatu";
-import { productsOnSale, newProducts } from './productdata';
+import { useNavigation } from '@react-navigation/native'; // Import useNavigation
+
+// Example product data for rendering the products (replace with your actual data)
+const productsOnSale = [
+    { id: '1', brand: 'Dorothy Perkins', name: 'Evening Dress', oldPrice: '150', newPrice: '125', discount: '-20%', image: require('../assets/potoshop1.png') },
+    { id: '2', brand: 'Sity', name: 'Sport Dress', oldPrice: '225', newPrice: '195', discount: '-15%', image: require('../assets/potoshop2.png') },
+    { id: '3', brand: 'Dorothy Perkins', name: 'Evening Dress', oldPrice: '150', newPrice: '125', discount: '-20%', image: require('../assets/potoshop3.png') },
+    { id: '4', brand: 'Sity', name: 'Sport Dress', oldPrice: '225', newPrice: '195', discount: '-15%', image: require('../assets/potoshop4.png') },
+    { id: '5', brand: 'Dorothy Perkins', name: 'Evening Dress', oldPrice: '150', newPrice: '125', discount: '-20%', image: require('../assets/potoshop5.png') },
+    { id: '6', brand: 'Sity', name: 'Sport Dress', oldPrice: '225', newPrice: '195', discount: '-15%', image: require('../assets/potoshop6.png') },
+];
+
+const newProducts = [
+    { id: '7', brand: 'New Brand', name: 'New Arrival Dress', image: require('../assets/potoshop7.png') },
+    { id: '8', brand: 'Another Brand', name: 'Summer Dress', image: require('../assets/potoshop8.png') },
+    { id: '9', brand: 'New Brand', name: 'New Arrival Dress', image: require('../assets/poto2drap.png') },
+    { id: '10', brand: 'Another Brand', name: 'Summer Dress', image: require('../assets/poto3drap.png') },
+    { id: '11', brand: 'New Brand', name: 'New Arrival Dress', image: require('../assets/poto4drap.png') },
+    { id: '12', brand: 'Another Brand', name: 'Summer Dress', image: require('../assets/potoshop8.png') },
+];
 
 const Shoppage = () => {
-  const [isCatalogView, setIsCatalogView] = useState(false);
+  const navigation = useNavigation(); // Initialize navigation
 
-  const toggleView = () => {
-    setIsCatalogView(!isCatalogView);
-  };
-
-  const renderProduct = useCallback(({ item }) => (
+  const renderProduct = ({ item }) => (
     <View style={styles.productCard}>
+      <View style={styles.discountBadge}>
+        <Text style={styles.discountText}>{item.discount}</Text>
+      </View>
       <Image style={styles.productImage} source={item.image} />
-      <View style={styles.productInfo}>
-        <Text style={styles.productBrand}>{item.brand}</Text>
-        <Text style={styles.productName}>{item.name}</Text>
-        <Text style={styles.productOldPrice}>Rp{item.oldPrice}</Text>
-        <Text style={styles.productNewPrice}>Rp{item.newPrice}</Text>
-        <Text style={styles.productDiscount}>{item.discount} OFF</Text>
+      <Text style={styles.productTitle}>{item.name}</Text>
+      <Text style={styles.productBrand}>{item.brand}</Text>
+      <View style={styles.priceContainer}>
+        <Text style={styles.oldPrice}>${item.oldPrice}</Text>
+        <Text style={styles.newPrice}>${item.newPrice}</Text>
+      </View>
+      <View style={styles.ratingContainer}>
+        <Ionicons name="star" size={16} color="orange" />
+        <Ionicons name="star" size={16} color="orange" />
+        <Ionicons name="star" size={16} color="orange" />
+        <Ionicons name="star" size={16} color="orange" />
+        <Ionicons name="star-half" size={16} color="orange" />
+        <Text style={styles.reviewCount}>(10)</Text>
       </View>
     </View>
-  ), []);
+  );
 
-  const renderNewProduct = useCallback(({ item }) => (
+  const renderNewProduct = ({ item }) => (
     <View style={styles.productCard}>
       <Image style={styles.productImage} source={item.image} />
-      <View style={styles.productInfo}>
-        <Text style={styles.productBrand}>{item.brand}</Text>
-        <Text style={styles.productName}>{item.name}</Text>
-      </View>
+      <Text style={styles.productTitle}>{item.name}</Text>
     </View>
-  ), []);
+  );
 
   return (
-    <ScrollView style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.headerText}>Street clothes</Text>
-      </View>
-      
-      <View style={styles.toggleContainer}>
-        <TouchableOpacity onPress={toggleView} style={styles.toggleButton}>
-          <Ionicons name={isCatalogView ? "grid-outline" : "list-outline"} size={24} color="black" />
-          <Text>{isCatalogView ? "Lihat Katalog" : "Lihat Kategori" }</Text>
-        </TouchableOpacity>
-      </View>
-      
-      {isCatalogView ? <Catalogsatu /> : <Categorisatu />}
-      
-      {!isCatalogView && (
-        <>
-          <View style={styles.section}>
-            <Text style={styles.sectionTitle}>Sale</Text>
-            <FlatList
-              horizontal
-              data={productsOnSale}
-              keyExtractor={item => item.id}
-              renderItem={renderProduct}
-              initialNumToRender={5}
-              maxToRenderPerBatch={5}
-              windowSize={10}
-            />
-          </View>
+    <View style={styles.container}>
+      <TouchableOpacity style={styles.backButton} onPress={() => navigation.navigate("categorisatu")}>
+  <Image source={require("../assets/icon2.jpg")} style={styles.backIcon} />
+</TouchableOpacity>
+      <ScrollView>
+        <View style={styles.header}>
+          <Image source={require('../assets/gambardrap.png')} style={styles.headerImage} />
+          <TouchableOpacity onPress={() => navigation.navigate("categorisatu")}>
+            <Text style={styles.headerText}>Street clothes</Text>
+          </TouchableOpacity>
+        </View>
 
-          <View style={styles.section}>
-            <Text style={styles.sectionTitle}>New</Text>
-            <FlatList
-              horizontal
-              data={newProducts}
-              keyExtractor={item => item.id}
-              renderItem={renderNewProduct}
-              initialNumToRender={5}
-              maxToRenderPerBatch={5}
-              windowSize={10}
-            />
+        <View style={styles.section}>
+          <View style={styles.sectionHeader}>
+            <Text style={styles.sectionTitle}>Sale</Text>
+            <TouchableOpacity>
+              <Text style={styles.viewAllText}>View all</Text>
+            </TouchableOpacity>
           </View>
-        </>
-      )}
-    </ScrollView>
+          <FlatList
+            horizontal
+            data={productsOnSale}
+            keyExtractor={item => item.id}
+            renderItem={renderProduct}
+            showsHorizontalScrollIndicator={false}
+          />
+        </View>
+
+        <View style={styles.section}>
+          <View style={styles.sectionHeader}>
+            <Text style={styles.sectionTitle}>New</Text>
+            <TouchableOpacity>
+              <Text style={styles.viewAllText}>View all</Text>
+            </TouchableOpacity>
+          </View>
+          <FlatList
+            horizontal
+            data={newProducts}
+            keyExtractor={item => item.id}
+            renderItem={renderNewProduct}
+            showsHorizontalScrollIndicator={false}
+          />
+        </View>
+      </ScrollView>
+
+      <View style={styles.navigationBar}>
+      </View>
+    </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
   },
   header: {
-    paddingTop: 40,
-    paddingBottom: 10,
-    backgroundColor: '#f8f8f8',
-    alignItems: 'center',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingHorizontal: 15,
+    position: 'relative',
+    height: 200,
+    marginBottom: 20,
+  },
+  headerImage: {
+    width: '100%',
+    height: '100%',
+    position: 'absolute',
   },
   headerText: {
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-  toggleContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    marginVertical: 10,
-  },
-  toggleButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#e0e0e0',
-    padding: 10,
-    borderRadius: 5,
+    fontSize: 28,
+    fontFamily: "MetroBold",
+    color: "white",
+    position: 'absolute',
+    bottom: 20,
+    left: 20,
   },
   section: {
-    marginVertical: 20,
+    marginBottom: 20,
   },
-  sectionTitle: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginHorizontal: 15,
+  sectionHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 20,
     marginBottom: 10,
   },
+  sectionTitle: {
+    fontSize: 22,
+    fontFamily: "MetroBold",
+  },
+  viewAllText: {
+    fontSize: 16,
+    color: 'gray',
+  },
   productCard: {
+    width: 150,
     marginHorizontal: 10,
   },
+  discountBadge: {
+    position: 'absolute',
+    top: 10,
+    left: 10,
+    backgroundColor: 'red',
+    paddingVertical: 2,
+    paddingHorizontal: 5,
+    borderRadius: 5,
+    zIndex: 1,
+  },
+  discountText: {
+    color: 'white',
+    fontSize: 12,
+  },
   productImage: {
-    width: 150,
-    height: 150,
-    borderRadius: 8,
+    width: '100%',
+    height: 180,
+    borderRadius: 10,
+    marginBottom: 10,
   },
   productInfo: {
-    marginTop: 10,
     alignItems: 'center',
+  },
+  productTitle: {
+    fontSize: 16,
+    fontFamily: "MetroMedium",
+    marginBottom: 5,
   },
   productBrand: {
     fontSize: 14,
-    color: '#888',
+    color: 'gray',
+    marginBottom: 5,
   },
-  productName: {
-    fontSize: 16,
-    fontWeight: 'bold',
+  priceContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 5,
   },
-  productOldPrice: {
-    fontSize: 12,
-    color: '#888',
-    textDecorationLine: 'line-through',
-  },
-  productNewPrice: {
+  oldPrice: {
     fontSize: 14,
-    fontWeight: 'bold',
-    color: '#d32f2f',
+    color: 'gray',
+    textDecorationLine: 'line-through',
+    marginRight: 5,
   },
-  productDiscount: {
-    fontSize: 12,
-    color: '#d32f2f',
+  newPrice: {
+    fontSize: 18,
+    fontFamily: "MetroBold",
+    color: "red",
   },
+  ratingContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  reviewCount: {
+    marginLeft: 5,
+    fontSize: 14,
+    color: 'gray',
+  },
+  navigationBar: {
+    height: 70,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    borderTopWidth: 1,
+    borderTopColor: '#f0f0f0',
+  },
+  navIcon: {
+    width: 28,
+    height: 28,
+  },
+    backButton: {
+      position: 'absolute',
+      top: 20,
+      left: 20,
+      zIndex: 1,
+    },
+    backIcon: {
+      width: 30,
+      height: 30,
+    },
+    
 });
 
 export default Shoppage;
